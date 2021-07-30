@@ -1,31 +1,31 @@
 <?php
-
-session_start();
-include 'connection.php';
+$host = "127.0.0.1:3325";
+$user = "root";
+$pass = "";
+$dbname = "login";
+$conn = mysqli_connect($host, $user, $pass, $dbname);
+if($conn){
+    echo "connection";
+}
 
 if(isset($_POST['submit']))
 {
-    $name=$_POST['fname'];
-    $Program=$_POST['programmes'];
-    $Course=$_POST['course'];
-    $Mobile=$_POST['number'];
-    $Email=$_POST['mail'];
-    $state=$_POST['state'];
-    $city=$_POST['city'];
+    $name = $_POST['fname'];
+    $program = $_POST['programmes'];
+    $course = $_POST['course'];
+    $number = $_POST['number'];
+    $email = $_POST['mail'];
+    $state = $_POST['state'];
+    $city = $_POST['city'];
     
-//    $c=mysql_connect("localhost","root","");
-//    mysqli_select_db("login");
-    $ins="insert into student_entries (fname, programmes, course, number, mail, state, city) values ('$name','$Program', '$Course', '$Mobile' , '$Email', '$state', '$city' )";
+
+    $query = "INSERT into student_entries(fname, programmes, course, number, mail, state, city) values('$name', '$program', '$course', '$number', '$email', '$state', '$city')";
     
-    $query = mysqli_query($ins,$conn);
-    if($ins)
+    $result = mysqli_query($conn, $query);
+    
+    if($result)
     {
-        echo  "inserted";
-    }
-    else
-    {
-        echo "error";
+        echo "data inserted";
     }
 }
-
 ?>
